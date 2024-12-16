@@ -56,7 +56,10 @@ function Edit({
     showPrice,
     showAddToCart,
     showQuickView,
-    displayStyle
+    displayStyle,
+    imageWidth,
+    imageHeight,
+    maintainAspectRatio
   } = attributes;
   const [isLoading, setIsLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(true);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
@@ -157,6 +160,53 @@ function Edit({
     // Final fallback to a placeholder
     return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
   };
+  const renderSizeControls = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: "Image Size Settings",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "Maintain Aspect Ratio",
+      checked: maintainAspectRatio,
+      onChange: value => setAttributes({
+        maintainAspectRatio: value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "Image Width (px)",
+      value: imageWidth,
+      onChange: value => {
+        setAttributes({
+          imageWidth: value
+        });
+        if (maintainAspectRatio) {
+          // Maintain aspect ratio of 3:4 when width changes
+          setAttributes({
+            imageHeight: Math.round(value * 1.333)
+          });
+        }
+      },
+      min: 100,
+      max: 800
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "Image Height (px)",
+      value: imageHeight,
+      onChange: value => {
+        setAttributes({
+          imageHeight: value
+        });
+        if (maintainAspectRatio) {
+          // Maintain aspect ratio of 3:4 when height changes
+          setAttributes({
+            imageWidth: Math.round(value * 0.75)
+          });
+        }
+      },
+      min: 100,
+      max: 800
+    })]
+  });
+  const imageStyle = {
+    width: `${imageWidth}px`,
+    height: `${imageHeight}px`,
+    objectFit: 'cover'
+  };
   const renderProductContent = () => {
     if (isLoading) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -178,7 +228,8 @@ function Edit({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
         src: imageUrl,
         alt: selectedProduct.title.rendered,
-        className: `filter-${imageFilter}`
+        className: `filter-${imageFilter}`,
+        style: imageStyle
       }), showPrice && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "product-price",
         dangerouslySetInnerHTML: {
@@ -291,7 +342,7 @@ function Edit({
             imageFilter: value
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      }), renderSizeControls(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: "Caption Settings",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: "Font Family",
@@ -338,7 +389,8 @@ function Edit({
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
           src: mediaUrl,
           alt: caption,
-          className: `filter-${imageFilter}`
+          className: `filter-${imageFilter}`,
+          style: imageStyle
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
           type: "text",
           value: caption || '',
@@ -510,7 +562,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/polaroid-generator","version":"0.1.0","title":"Polaroid Generator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"photos":{"type":"number","default":6},"mediaId":{"type":"number"},"mediaUrl":{"type":"string"},"caption":{"type":"string"},"frameColor":{"type":"string","default":"#ffffff"},"frameStyle":{"type":"string","default":"classic"},"imageFilter":{"type":"string","default":"none"},"rotation":{"type":"number","default":0},"framePadding":{"type":"number","default":10},"captionFontFamily":{"type":"string","default":"Courier New"},"captionFontSize":{"type":"number","default":14},"layout":{"type":"string","default":"single"},"columns":{"type":"number","default":3},"gap":{"type":"number","default":20},"randomRotation":{"type":"boolean","default":false},"images":{"type":"array","default":[]},"isWooProduct":{"type":"boolean","default":false},"productId":{"type":"number"},"showPrice":{"type":"boolean","default":true},"showAddToCart":{"type":"boolean","default":true},"showQuickView":{"type":"boolean","default":true},"displayStyle":{"type":"string","default":"product"}},"supports":{"html":false,"align":["wide","full"],"color":{"background":true,"text":false}},"textdomain":"polaroid-generator","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/polaroid-generator","version":"0.1.0","title":"Polaroid Generator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"photos":{"type":"number","default":6},"mediaId":{"type":"number"},"mediaUrl":{"type":"string"},"caption":{"type":"string"},"frameColor":{"type":"string","default":"#ffffff"},"frameStyle":{"type":"string","default":"classic"},"imageFilter":{"type":"string","default":"none"},"rotation":{"type":"number","default":0},"framePadding":{"type":"number","default":10},"captionFontFamily":{"type":"string","default":"Courier New"},"captionFontSize":{"type":"number","default":14},"imageWidth":{"type":"number","default":300},"imageHeight":{"type":"number","default":400},"maintainAspectRatio":{"type":"boolean","default":true},"layout":{"type":"string","default":"single"},"columns":{"type":"number","default":3},"gap":{"type":"number","default":20},"randomRotation":{"type":"boolean","default":false},"images":{"type":"array","default":[]},"isWooProduct":{"type":"boolean","default":false},"productId":{"type":"number"},"showPrice":{"type":"boolean","default":true},"showAddToCart":{"type":"boolean","default":true},"showQuickView":{"type":"boolean","default":true},"displayStyle":{"type":"string","default":"product"}},"supports":{"html":false,"align":["wide","full"],"color":{"background":true,"text":false}},"textdomain":"polaroid-generator","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js"}');
 
 /***/ })
 

@@ -6,6 +6,13 @@
 
 // Check if WooCommerce is active
 $woocommerce_active = class_exists('WooCommerce');
+
+// Create image style attribute
+$image_style = sprintf(
+  'width: %dpx; height: %dpx; object-fit: cover;',
+  $attributes['imageWidth'],
+  $attributes['imageHeight']
+);
 ?>
 <div <?php echo get_block_wrapper_attributes(); ?>>
   <div class="polaroid-frame <?php echo esc_attr($attributes['frameStyle']); ?>"
@@ -27,7 +34,8 @@ $woocommerce_active = class_exists('WooCommerce');
           <div class="polaroid-image-container">
             <img src="<?php echo esc_url($image_url); ?>"
               alt="<?php echo esc_attr($product->get_name()); ?>"
-              class="filter-<?php echo esc_attr($attributes['imageFilter']); ?>" />
+              class="filter-<?php echo esc_attr($attributes['imageFilter']); ?>"
+              style="<?php echo esc_attr($image_style); ?>" />
 
             <?php if ($attributes['showPrice']) : ?>
               <div class="product-price">
@@ -58,7 +66,8 @@ $woocommerce_active = class_exists('WooCommerce');
         <div class="polaroid-image-container">
           <img src="<?php echo esc_url($attributes['mediaUrl']); ?>"
             alt="<?php echo esc_attr($attributes['caption']); ?>"
-            class="filter-<?php echo esc_attr($attributes['imageFilter']); ?>" />
+            class="filter-<?php echo esc_attr($attributes['imageFilter']); ?>"
+            style="<?php echo esc_attr($image_style); ?>" />
           <?php if (!empty($attributes['caption'])) : ?>
             <div class="polaroid-caption"
               style="font-family: <?php echo esc_attr($attributes['captionFontFamily']); ?>;

@@ -50,6 +50,18 @@
       "type": "number",
       "default": 14
     },
+    "imageWidth": {
+      "type": "number",
+      "default": 300
+    },
+    "imageHeight": {
+      "type": "number",
+      "default": 400
+    },
+    "maintainAspectRatio": {
+      "type": "boolean",
+      "default": true
+    },
     "layout": {
       "type": "string",
       "default": "single"

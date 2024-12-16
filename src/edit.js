@@ -25,7 +25,10 @@ export default function Edit({ attributes, setAttributes }) {
     showPrice,
     showAddToCart,
     showQuickView,
-    displayStyle
+    displayStyle,
+    imageWidth,
+    imageHeight,
+    maintainAspectRatio
   } = attributes;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -104,6 +107,48 @@ export default function Edit({ attributes, setAttributes }) {
     return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
   };
 
+  const renderSizeControls = () => (
+    <PanelBody title="Image Size Settings">
+      <ToggleControl
+        label="Maintain Aspect Ratio"
+        checked={maintainAspectRatio}
+        onChange={(value) => setAttributes({ maintainAspectRatio: value })}
+      />
+      <RangeControl
+        label="Image Width (px)"
+        value={imageWidth}
+        onChange={(value) => {
+          setAttributes({ imageWidth: value });
+          if (maintainAspectRatio) {
+            // Maintain aspect ratio of 3:4 when width changes
+            setAttributes({ imageHeight: Math.round(value * 1.333) });
+          }
+        }}
+        min={100}
+        max={800}
+      />
+      <RangeControl
+        label="Image Height (px)"
+        value={imageHeight}
+        onChange={(value) => {
+          setAttributes({ imageHeight: value });
+          if (maintainAspectRatio) {
+            // Maintain aspect ratio of 3:4 when height changes
+            setAttributes({ imageWidth: Math.round(value * 0.75) });
+          }
+        }}
+        min={100}
+        max={800}
+      />
+    </PanelBody>
+  );
+
+  const imageStyle = {
+    width: `${imageWidth}px`,
+    height: `${imageHeight}px`,
+    objectFit: 'cover'
+  };
+
   const renderProductContent = () => {
     if (isLoading) {
       return (
@@ -130,6 +175,7 @@ export default function Edit({ attributes, setAttributes }) {
           src={imageUrl}
           alt={selectedProduct.title.rendered}
           className={`filter-${imageFilter}`}
+          style={imageStyle}
         />
         {showPrice && (
           <div className="product-price"
@@ -238,6 +284,8 @@ export default function Edit({ attributes, setAttributes }) {
           />
         </PanelBody>
 
+        {renderSizeControls()}
+
         <PanelBody title="Caption Settings">
           <SelectControl
             label="Font Family"
@@ -283,6 +331,7 @@ export default function Edit({ attributes, setAttributes }) {
                 src={mediaUrl}
                 alt={caption}
                 className={`filter-${imageFilter}`}
+                style={imageStyle}
               />
               <input
                 type="text"
