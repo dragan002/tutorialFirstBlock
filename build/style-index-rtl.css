@@ -8,7 +8,204 @@
  * Replace them with your own styles or remove the file completely.
  */
 .wp-block-create-block-polaroid-generator {
-  background-color: #21759b;
-  color: #fff;
-  padding: 2px;
+  padding: 2rem;
+}
+.wp-block-create-block-polaroid-generator .polaroids {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.wp-block-create-block-polaroid-generator .polaroid {
+  background: #fff;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: rotate(1deg);
+  transition: all 0.3s ease;
+}
+.wp-block-create-block-polaroid-generator .polaroid:hover {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.wp-block-create-block-polaroid-generator .polaroid img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+  margin-bottom: 0.5rem;
+  filter: sepia(0.2);
+  transition: filter 0.3s ease;
+}
+.wp-block-create-block-polaroid-generator .polaroid img:hover {
+  filter: sepia(0);
+}
+.wp-block-create-block-polaroid-generator.alignfull .polaroids {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.wp-block-create-block-polaroid-generator.alignwide .polaroids {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame {
+  display: inline-block;
+  transition: all 0.3s ease;
+  margin: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame.classic {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame.modern {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame.vintage {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame.vintage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+  pointer-events: none;
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container {
+  position: relative;
+  overflow: hidden;
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: all 0.3s ease;
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-none {
+  filter: none;
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-sepia {
+  filter: sepia(0.7);
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-grayscale {
+  filter: grayscale(1);
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-vintage {
+  filter: sepia(0.3) contrast(1.1) brightness(1.1);
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-fade {
+  filter: brightness(1.1) contrast(0.9) saturate(0.8);
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img.filter-contrast {
+  filter: contrast(1.4) brightness(1.1);
+}
+.wp-block-create-block-polaroid-generator .polaroid-caption {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  border: none;
+  background: transparent;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+.wp-block-create-block-polaroid-generator .polaroid-caption:focus {
+  outline: none;
+}
+.wp-block-create-block-polaroid-generator .upload-button {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.wp-block-create-block-polaroid-generator .upload-button:hover {
+  background: #e0e0e0;
+  border-color: #999;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container {
+  position: relative;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .product-price {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .add-to-cart-button,
+.wp-block-create-block-polaroid-generator .polaroid-product-container .quick-view-button {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .add-to-cart-button {
+  bottom: 60px;
+  background-color: #7f54b3;
+  color: white;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .add-to-cart-button:hover {
+  background-color: #673ab7;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .quick-view-button {
+  bottom: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container .quick-view-button:hover {
+  background-color: #e0e0e0;
+}
+.wp-block-create-block-polaroid-generator .polaroid-product-container:hover .add-to-cart-button,
+.wp-block-create-block-polaroid-generator .polaroid-product-container:hover .quick-view-button {
+  opacity: 1;
+}
+.wp-block-create-block-polaroid-generator .select-product-message {
+  padding: 30px;
+  text-align: center;
+  background: #f7f7f7;
+  border: 2px dashed #ddd;
+  color: #666;
+  font-style: italic;
+}
+.wp-block-create-block-polaroid-generator .product-sale-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #e2401c;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(15deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }

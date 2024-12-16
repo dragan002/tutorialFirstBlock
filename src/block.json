@@ -12,6 +12,86 @@
     "photos": {
       "type": "number",
       "default": 6
+    },
+    "mediaId": {
+      "type": "number"
+    },
+    "mediaUrl": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "frameColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "frameStyle": {
+      "type": "string",
+      "default": "classic"
+    },
+    "imageFilter": {
+      "type": "string",
+      "default": "none"
+    },
+    "rotation": {
+      "type": "number",
+      "default": 0
+    },
+    "framePadding": {
+      "type": "number",
+      "default": 10
+    },
+    "captionFontFamily": {
+      "type": "string",
+      "default": "Courier New"
+    },
+    "captionFontSize": {
+      "type": "number",
+      "default": 14
+    },
+    "layout": {
+      "type": "string",
+      "default": "single"
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "gap": {
+      "type": "number",
+      "default": 20
+    },
+    "randomRotation": {
+      "type": "boolean",
+      "default": false
+    },
+    "images": {
+      "type": "array",
+      "default": []
+    },
+    "isWooProduct": {
+      "type": "boolean",
+      "default": false
+    },
+    "productId": {
+      "type": "number"
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAddToCart": {
+      "type": "boolean",
+      "default": true
+    },
+    "showQuickView": {
+      "type": "boolean",
+      "default": true
+    },
+    "displayStyle": {
+      "type": "string",
+      "default": "product"
     }
   },
   "supports": {

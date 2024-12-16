@@ -6,8 +6,43 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-polaroid-generator {
-  border: 1px dotted #f00;
+.wp-block-create-block-polaroid-generator .loading-container {
+  padding: 30px;
+  text-align: center;
+  background: #f7f7f7;
+  border: 2px dashed #ddd;
+}
+.wp-block-create-block-polaroid-generator .loading-container .components-spinner {
+  margin: 0 auto 10px;
+}
+.wp-block-create-block-polaroid-generator .loading-container p {
+  margin: 0;
+  color: #666;
+}
+.wp-block-create-block-polaroid-generator .select-product-message {
+  padding: 30px;
+  text-align: center;
+  background: #f7f7f7;
+  border: 2px dashed #ddd;
+  color: #666;
+  font-style: italic;
+}
+.wp-block-create-block-polaroid-generator .polaroid-frame {
+  min-width: 200px;
+  min-height: 200px;
+}
+.wp-block-create-block-polaroid-generator .polaroid-image-container img {
+  max-width: 100%;
+  height: auto;
+}
+.wp-block-create-block-polaroid-generator .add-to-cart-button,
+.wp-block-create-block-polaroid-generator .quick-view-button {
+  opacity: 1 !important;
+  pointer-events: none;
+}
+.wp-block-create-block-polaroid-generator .product-price {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 
 /*# sourceMappingURL=index.css.map*/
